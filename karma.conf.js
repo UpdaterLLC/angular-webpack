@@ -18,6 +18,7 @@ var preLoaders = hasCoverage ? [
   {test: /\.js$/, loader: 'babel', include: include}
 ];
 var loaders = [
+  {test: /\.styl$/, loader: 'style!css!stylus?paths=node_modules/stylus/' },
   {test: /\.sass$/, loader: 'style!css?sourceMap!sass?sourceMap&indentedSyntax=true'},
   {test: /\.png$/, loader: 'null'},
   {test: /\.jpg$/, loader: 'null'},

@@ -19,19 +19,22 @@ var config = {
   module: {
     loaders: [
       {test: /\.js$/, loader: 'babel', include: path.resolve('src')},
+      {test: /\.json$/, loader: 'json' },
       {test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?sourceMap')},
+      {test: /\.styl$/, loader: 'style!css!stylus?paths=node_modules/stylus/' },
 
       {
         test: /\.sass$/,
         loader: ExtractTextPlugin
           .extract('style', 'css?sourceMap!sass?sourceMap&indentedSyntax=true')
       },
-      {test: /\.(png|jpg)$/, loader: 'url?limit=32768'},
+      {test: /\.(png|jpg|jpeg|gif|woff)$/, loader: 'url?limit=32768'},
       {test: /\.html$/, loader: 'ng-cache?prefix=[dir]/[dir]'},
       {test: /\.haml$/, loader: 'hamlc-loader'}
     ],
     preLoaders: [{test: /\.js$/, loader: 'eslint', include: path.resolve('src')}],
     noParse: [
+      /\.min\.js/,
       /angular\.src\.js/
     ]
   },
