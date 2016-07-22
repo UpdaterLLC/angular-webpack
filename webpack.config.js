@@ -1,8 +1,9 @@
 var path = require('path');
+var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+var config = {
   entry: {
     app: [
       './vendor/angular.src.js',
@@ -41,7 +42,7 @@ module.exports = {
       inject: 'body'
     })
   ],
-  devtool: 'eval-source-map',
+  devtool: '#source-map',
   devServer: {
     historyApiFallback: true,
     stats: {
@@ -54,3 +55,56 @@ module.exports = {
     configFile: 'src/.eslintrc'
   }
 };
+
+
+if (process.env.NODE_ENV === 'production') {
+
+  config.bail = true;
+  config.debug = false;
+  config.profile = false;
+  // config.devtool = false;
+  config.plugins = config.plugins.concat([
+    new webpack.optimize.OccurenceOrderPlugin(true),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false
+      },
+      compress: {
+        warnings: false,
+        screw_ie8: true
+      }
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    })
+  ]);
+}
+if (process.env.NODE_ENV === 'development') {
+  config.devtool = '#inline-source-map';
+  config.plugins = config.plugins.concat([
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development')
+      }
+    })
+  ]);
+}
+if (process.env.NODE_ENV === 'test') {
+  config.bail = true;
+  config.debug = false;
+  config.profile = false;
+  config.devtool = false;
+  config.plugins = config.plugins.concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('test')
+      }
+    })
+  ]);
+}
+
+module.exports = config;
