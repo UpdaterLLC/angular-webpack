@@ -1,0 +1,16 @@
+--- angular.src.js.orig	2016-07-21 17:05:03.000000000 +0900
++++ angular.src.js	2016-07-21 17:02:25.000000000 +0900
+@@ -4514,6 +4514,13 @@
+   var runBlocks = loadModules(modulesToLoad);
+   instanceInjector = protoInstanceInjector.get('$injector');
+   instanceInjector.strictDi = strictDi;
++
++  // TODO: exposed $injector endpoint to load modules dynamically. Keep it when upgrade AngularJS
++  // Added by Nikita Butenko <nik@butenko.me>
++  instanceInjector.loadModule = function(moduleName) {
++    forEach(loadModules([moduleName]), function(fn) { instanceInjector.invoke(fn || noop); });
++  };
++
+   forEach(runBlocks, function(fn) { if (fn) instanceInjector.invoke(fn); });
+ 
+   return instanceInjector;
