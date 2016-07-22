@@ -52,10 +52,21 @@ module.exports = function (config) {
         colors: true
       }
     },
+    webpackServer: {
+      noInfo: true //please don't spam the console when running in karma!
+    },
     preprocessors: {
       'spec.js': ['webpack']
     },
-    reporters: ['progress', 'coverage'],
+    reporters: ['spec', 'coverage'],
+    specReporter: {
+      maxLogLines: 5,         // limit number of lines logged per test
+      suppressErrorSummary: true,  // do not print error summary
+      suppressFailed: false,  // do not print information about failed tests
+      suppressPassed: false,  // do not print information about passed tests
+      suppressSkipped: true,  // do not print information about skipped tests
+      showSpecTiming: false // print the time elapsed for each spec
+    },
     coverageReporter: {
       dir: 'coverage/',
       subdir: '.',
@@ -68,9 +79,10 @@ module.exports = function (config) {
     },
     port: 9876,
     colors: true,
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
     autoWatch: false,
     browsers: ['PhantomJS'],
-    singleRun: true
+    singleRun: true,
+    captureTimeout: 5000,
   });
 };
