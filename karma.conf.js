@@ -82,7 +82,18 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_DEBUG,
     autoWatch: false,
-    browsers: ['PhantomJS'],
+    browsers: ['PhantomJS_Desktop'],
+    customLaunchers: {
+      'PhantomJS_Desktop': {
+        base: 'PhantomJS',
+        options: {
+          viewportSize: {
+            width: 1280,
+            height: 1000
+          }
+        }
+      }
+    },
     singleRun: true,
     captureTimeout: 5000,
   });

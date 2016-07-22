@@ -1,3 +1,5 @@
+require('./app.styl');
+
 const app = angular.module('app', [
   'ngRoute'
 ]);
