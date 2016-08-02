@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head lang="ja">
   <meta charset="UTF-8">
-  <title>Angular Webpack</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="canonical" href="">
+  <base href="/">
+  <title></title>
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- /// OGP /// -->
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <meta property="og:site_name" content="">
+  <meta property="og:type" content="company">
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+
 </head>
-<body ng-app="app" ng-strict-di>
+<body>
 
-<ul>
-  <li><a href="#/">Start</a></li>
-  <li><a href="#/home">Home (embedded and external images)</a></li>
-  <li><a href="#/about">About</a></li>
-  <li><a href="#/haml">HAML (test HAML templates)</a></li>
-</ul>
-
-<ng-view></ng-view>
+<section ng-app="app" ng-strict-di>
+  <i class="fa fa-fw fa-question"></i>
+  <ng-view></ng-view>
+</section>
 
 </body>
 </html>
