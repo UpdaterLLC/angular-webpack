@@ -23,7 +23,15 @@
 </head>
 <body>
 
+<!--[if lt IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
 <section ng-app="app" ng-strict-di>
+  <div uib-alert ng-cloak
+       ng-init="alert = { type: 'success', msg: 'Well done! You successfully load angular-ui-bootstrap.' }"
+       ng-class="'alert-' + (alert.type || 'warning')">{{alert.msg}}</div>
+
   <ng-view></ng-view>
 </section>
 

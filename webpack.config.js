@@ -6,8 +6,19 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var config = {
   entry: {
     app: [
+      'jquery/dist/jquery.min.js',
       './vendor/angular.src.js',
-      './node_modules/angular-route/angular-route.js',
+      'angular/angular-csp.css',
+      'angular-route/angular-route.js',
+      'angular-resource/angular-resource.js',
+      'angular-cookie/angular-cookie.min.js',
+      'angular-sanitize/angular-sanitize.js',
+      'angular-validation-match/dist/angular-validation-match.js',
+      './vendor/ui-bootstrap-remedy.css',
+      'bootstrap-webpack',
+      'angular-ui-bootstrap',
+      'font-awesome-webpack',
+      './src/app.styl',
       './src/app.js'
     ]
   },
@@ -45,6 +56,7 @@ var config = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
     new ExtractTextPlugin('style.css', {allChunks: true}),
     new HtmlWebpackPlugin({
       template: path.resolve('src', 'index.html'),
@@ -84,11 +96,7 @@ if (process.env.NODE_ENV === 'production') {
         screw_ie8: true
       }
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    })
+    new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify('production')}})
   ]);
 }
 if (process.env.NODE_ENV === 'development') {
@@ -108,11 +116,7 @@ if (process.env.NODE_ENV === 'test') {
   config.profile = false;
   config.devtool = false;
   config.plugins = config.plugins.concat([
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('test')
-      }
-    })
+    new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify('test')}})
   ]);
 }
 

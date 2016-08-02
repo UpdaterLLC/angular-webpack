@@ -1,12 +1,11 @@
-require('jquery/dist/jquery.min.js');
-require('expose?$!expose?jQuery!jquery');
-require('bootstrap-webpack');
-require('angular-bootstrap/ui-bootstrap-tpls.min.js');
-require('font-awesome-webpack');
-require('./app.styl');
 
 const app = angular.module('app', [
-  'ngRoute'
+  'ngRoute',
+  'ui.bootstrap',
+  'ngResource',
+  'ipCookie',
+  'ngSanitize',
+  'validation.match'
 ]);
 
 app.config(['$logProvider',
