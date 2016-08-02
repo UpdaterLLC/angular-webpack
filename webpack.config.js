@@ -28,7 +28,7 @@ var config = {
         loader: ExtractTextPlugin
           .extract('style', 'css?sourceMap!sass?sourceMap&indentedSyntax=true')
       },
-      {test: /\.(png|jpg|jpeg|gif|woff)$/, loader: 'url?limit=32768'},
+      {test: /\.(png|jpg|jpeg|gif)$/, loader: 'url?limit=32768'},
       {test: /\.html$/, loader: 'ng-cache?prefix=[dir]/[dir]'},
       {test: /\.haml$/, loader: 'hamlc-loader'}
     ],

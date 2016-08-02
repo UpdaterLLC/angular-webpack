@@ -31,11 +31,14 @@
   "devDependencies": {
     "angular-mocks": "^1.5.7",
     "babel-loader": "^5.3.2",
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-webpack": "0.0.5",
     "cross-env": "^2.0.0",
     "css-loader": "^0.15.6",
     "eslint": "^3.1.1",
     "eslint-loader": "^1.4.1",
     "exports-loader": "^0.6.2",
+    "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "hamlc-loader": "0.0.11",
@@ -50,6 +53,8 @@
     "karma-sourcemap-loader": "^0.3.5",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "^1.7.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
     "merge-stream": "^0.1.8",
     "ng-cache-loader": "0.0.9",
     "node-sass": "^3.4.2",
@@ -66,6 +71,10 @@
   },
   "dependencies": {
     "angular": "^1.5.7",
-    "angular-route": "^1.4.3"
+    "angular-bootstrap": "^0.12.2",
+    "angular-route": "^1.4.3",
+    "bootstrap": "^3.3.7",
+    "jquery": "^1.12.4",
+    "ui-bootstrap": "^0.1.2"
   }
 }
