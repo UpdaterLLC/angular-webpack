@@ -4,12 +4,14 @@
   "description": "Angular + Webpack build with Karma tests support",
   "main": "index.js",
   "scripts": {
+    "postinstall": "./node_modules/protractor/bin/webdriver-manager update",
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "build": "rm -rf dest && cross-env NODE_ENV=production webpack",
     "clean": "rm -rf dest coverage",
     "test-server-stop": "cross-env NODE_ENV=test BLUEBIRD_WARNINGS=0 karma stop",
     "test-server": "cross-env NODE_ENV=test BLUEBIRD_WARNINGS=0 karma start ./karma.conf.js --no-single-run",
     "test": "cross-env NODE_ENV=test BLUEBIRD_WARNINGS=0 karma run ./karma.conf.js --browsers PhantomJS",
+    "e2e-server": "./node_modules/protractor/bin/webdriver-manager start",
     "validate": "eslint .",
     "mobiledebug": "weinre --boundHost -all-"
   },
@@ -53,6 +55,7 @@
     "node-sass": "^3.4.2",
     "null-loader": "^0.1.1",
     "phantomjs": "^1.9.17",
+    "protractor": "^4.0.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.12.3",
     "stylus": "^0.54.5",
