@@ -34,6 +34,7 @@ var config = {
       'spin.js',
       'angular-spinner',
       'node-uuid',
+      'msgpack-lite',
       './src/app.styl',
       './src/app.js'
     ]

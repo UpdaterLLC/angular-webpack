@@ -61,6 +61,7 @@
     "less-loader": "^2.2.3",
     "lodash": "^3.10.1",
     "merge-stream": "^0.1.8",
+    "msgpack-lite": "^0.1.20",
     "ng-cache-loader": "0.0.9",
     "node-sass": "^3.4.2",
     "node-uuid": "^1.4.7",
