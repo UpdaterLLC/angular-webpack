@@ -5,6 +5,7 @@ const app = angular.module('app', [
   'ngResource',
   'ipCookie',
   'ngSanitize',
+  'ngStorage',
   'validation.match',
   'nvd3ChartDirectives',
   'angularSpinner'
