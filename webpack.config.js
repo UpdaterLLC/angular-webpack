@@ -22,6 +22,7 @@ var config = {
       'angular-resource',
       'angular-cookie',
       'angular-sanitize',
+      'angular-animate',
       'angular-validation-match',
       'd3',
       'nvd3',

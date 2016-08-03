@@ -6,6 +6,7 @@ const app = angular.module('app', [
   'ipCookie',
   'ngSanitize',
   'ngStorage',
+  'ngAnimate',
   'validation.match',
   'nvd3ChartDirectives',
   'angularSpinner'
