@@ -28,9 +28,21 @@
 <![endif]-->
 
 <section ng-app="app" ng-strict-di>
-  <div uib-alert ng-cloak
+  <div uib-alert
+       ng-cloak
        ng-init="alert = { type: 'success', msg: 'Well done! You successfully load angular-ui-bootstrap.' }"
        ng-class="'alert-' + (alert.type || 'warning')">{{alert.msg}}</div>
+
+  <div ng-cloak
+       ng-controller="ExampleCtrl">
+    <nvd3-line-chart
+        data="exampleData"
+        showXAxis="true"
+        showYAxis="true"
+        tooltips="true"
+        interactive="true">
+    </nvd3-line-chart>
+  </div>
 
   <ng-view></ng-view>
 </section>

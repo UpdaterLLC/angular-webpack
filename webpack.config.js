@@ -14,6 +14,10 @@ var config = {
       'angular-cookie/angular-cookie.min.js',
       'angular-sanitize/angular-sanitize.js',
       'angular-validation-match/dist/angular-validation-match.js',
+      'd3/d3.js',
+      'nvd3/nv.d3.js',
+      'nvd3/nv.d3.css',
+      'angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js',
       './vendor/ui-bootstrap-remedy.css',
       'bootstrap-webpack',
       'angular-ui-bootstrap',
@@ -56,7 +60,13 @@ var config = {
     ]
   },
   plugins: [
-    new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
+    new webpack.ProvidePlugin({
+      $: 'jquery', jQuery: 'jquery', "window.jQuery": 'jquery',
+      _: 'lodash',
+      'window.d3': 'd3',
+      nv: 'nvd3', 'window.nv': 'nvd3',
+      // 'window.angular': 'angular.src.js',
+    }),
     new ExtractTextPlugin('style.css', {allChunks: true}),
     new HtmlWebpackPlugin({
       template: path.resolve('src', 'index.html'),
