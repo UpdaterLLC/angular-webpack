@@ -35,6 +35,7 @@ var config = {
       'angular-spinner',
       'node-uuid',
       'msgpack-lite',
+      'axios',
       './src/app.styl',
       './src/app.js'
     ]

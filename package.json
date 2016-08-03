@@ -31,6 +31,7 @@
   "devDependencies": {
     "angular-mocks": "^1.5.8",
     "angular-spinner": "^0.8.1",
+    "axios": "^0.10.0",
     "babel-loader": "^5.3.2",
     "bootstrap-sass": "^3.3.7",
     "bootstrap-webpack": "0.0.5",
