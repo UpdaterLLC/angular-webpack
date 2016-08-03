@@ -6,7 +6,8 @@ const app = angular.module('app', [
   'ipCookie',
   'ngSanitize',
   'validation.match',
-  'nvd3ChartDirectives'
+  'nvd3ChartDirectives',
+  'angularSpinner'
 ]);
 
 app.config(['$logProvider',
@@ -45,5 +46,12 @@ function ExampleCtrl($scope) {
 }
 ExampleCtrl.$inject = ['$scope'];
 app.controller('ExampleCtrl', ExampleCtrl);
+
+function ExampleSpinnerCtrl($scope, $timeout) {
+  $scope.showAppSpinner = true;
+  $timeout(() => $scope.showAppSpinner = false, 2000);
+}
+ExampleSpinnerCtrl.$inject = ['$scope', '$timeout'];
+app.controller('ExampleSpinnerCtrl', ExampleSpinnerCtrl);
 
 export default app;

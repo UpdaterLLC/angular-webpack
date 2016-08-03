@@ -1,0 +1,32 @@
+--- angular-spinner.js.orig	2016-08-03 17:34:13.000000000 +0900
++++ angular-spinner.js	2016-08-03 17:34:51.000000000 +0900
+@@ -4,10 +4,7 @@
+  * Copyright (C) 2013, 2014, 2015, 2016, Uri Shaked and contributors.
+  */
+ 
+-'format amd';
+-
+-(function (root) {
+-	'use strict';
++(function(window, angular) {'use strict';
+ 
+ 	function factory(angular, Spinner) {
+ 
+@@ -125,14 +122,6 @@
+ 			}]);
+ 	}
+ 
+-    if ((typeof module === 'object') && module.exports) {
+-		/* CommonJS module */
+-		module.exports = factory(require('angular'), require('spin.js'));
+-	} else if (typeof define === 'function' && define.amd) {
+-		/* AMD module */
+-		define(['angular', 'spin'], factory);
+-	} else {
+-		/* Browser global */
+-		factory(root.angular, root.Spinner);
+-	}
+-}(this));
++	module.exports = factory(angular, require('spin.js'));
++
++})(window, window.angular);

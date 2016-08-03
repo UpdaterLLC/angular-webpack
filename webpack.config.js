@@ -4,11 +4,18 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var config = {
+  resolve: {
+    alias: {
+      spin: 'spin.js',
+      angular: path.join(process.cwd(), 'vendor/angular.src.js'),
+      'angular-spinner': path.join(process.cwd(), 'vendor/angular-spinner.js'),
+    }
+  },
   entry: {
     app: [
       'jquery/dist/jquery.min.js',
-      './vendor/angular.src.js',
-      'angular/angular-csp.css',
+      'angular',
+      './node_modules/angular/angular-csp.css',
       'angular-route/angular-route.js',
       'angular-resource/angular-resource.js',
       'angular-cookie/angular-cookie.min.js',
@@ -22,6 +29,8 @@ var config = {
       'bootstrap-webpack',
       'angular-ui-bootstrap',
       'font-awesome-webpack',
+      'spin.js',
+      'angular-spinner',
       './src/app.styl',
       './src/app.js'
     ]
