@@ -9,8 +9,10 @@
     "build": "rm -rf dest && cross-env NODE_ENV=production webpack",
     "clean": "rm -rf dest coverage",
     "test-server-stop": "cross-env NODE_ENV=test BLUEBIRD_WARNINGS=0 karma stop",
-    "test-server": "cross-env NODE_ENV=test BLUEBIRD_WARNINGS=0 karma start ./karma.conf.js --no-single-run",
-    "test": "cross-env NODE_ENV=test BLUEBIRD_WARNINGS=0 karma run ./karma.conf.js --browsers PhantomJS",
+    "test-server": "cross-env NODE_ENV=test BLUEBIRD_WARNINGS=0 karma start ./karma.conf.js --no-single-run --coverage",
+    "test": "cross-env NODE_ENV=test BLUEBIRD_WARNINGS=0 karma run ./karma.conf.js",
+    "coverage": "cross-env NODE_ENV=test BLUEBIRD_WARNINGS=0 karma start ./karma.conf.js --single-run --coverage",
+    "prebuild": "npm run coverage || exit 0",
     "e2e-server": "./node_modules/protractor/bin/webdriver-manager start",
     "validate": "eslint .",
     "mobiledebug": "weinre --boundHost -all-"
@@ -54,6 +56,7 @@
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.3",
     "karma-coverage": "^0.4.2",
+    "karma-html-reporter": "^0.2.7",
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.0",
     "karma-sourcemap-loader": "^0.3.5",
@@ -78,7 +81,8 @@
     "stylus-loader": "^2.1.1",
     "url-loader": "^0.5.6",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "yargs": "^4.8.1"
   },
   "dependencies": {
     "angular": "^1.5.8",

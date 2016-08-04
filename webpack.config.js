@@ -1,10 +1,18 @@
 var path = require('path');
+var argv = require('yargs').argv;
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var sources = [
+  path.resolve('./src')
+];
+
 var config = {
+  target: 'web',
   resolve: {
+    root: path.join(__dirname, ''),
+    modulesDirectories: ['node_modules'],
     alias: {
       spin: 'spin.js',
       angular: path.join(process.cwd(), 'vendor/angular.src.js'),
@@ -49,7 +57,7 @@ var config = {
   },
   module: {
     loaders: [
-      {test: /\.js$/, loader: 'babel', include: path.resolve('src')},
+      {test: /\.js$/, loader: 'babel', include: sources},
       {test: /\.json$/, loader: 'json' },
       {test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?sourceMap')},
       {test: /\.styl$/, loader: 'style!css!stylus?paths=node_modules/stylus/' },
@@ -69,7 +77,7 @@ var config = {
       {test: /\.html$/, loader: 'ng-cache?prefix=[dir]/[dir]'},
       {test: /\.haml$/, loader: 'hamlc-loader'}
     ],
-    preLoaders: [{test: /\.js$/, loader: 'eslint', include: path.resolve('src')}],
+    preLoaders: [{test: /\.js$/, loader: 'eslint', include: sources}],
     noParse: [
       /\.min\.js/,
       /angular\.src\.js/
@@ -137,10 +145,18 @@ if (process.env.NODE_ENV === 'test') {
   config.bail = true;
   config.debug = false;
   config.profile = false;
-  config.devtool = false;
+  config.devtool = 'eval';
+  config.cache = true;
   config.plugins = config.plugins.concat([
     new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify('test')}})
   ]);
+  if (argv.coverage) {
+    config.module.preLoaders = [
+      {test: /_spec\.js$/, loader: 'babel', include: sources},
+      {test: /\.js$/, loader: 'isparta', include: sources, exclude: /_spec\.js$/}
+    ].concat(config.module.preLoaders);
+  }
+
 }
 
 module.exports = config;

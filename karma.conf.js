@@ -1,53 +1,17 @@
 var path = require('path');
-var hasCoverage = global.process.argv.reduce(function (result, arg) {
-  return arg.indexOf('coverage') !== -1 || result;
-});
-
-var include = [
-  path.resolve('./src')
-];
-
-var preLoaders = hasCoverage ? [
-
-  // Process test code with Babel
-  {test: /_spec\.js$/, loader: 'babel', include: include},
-
-  // Process all non-test code with Isparta
-  {test: /\.js$/, loader: 'isparta', include: include, exclude: /_spec\.js$/}
-] : [
-  {test: /\.js$/, loader: 'babel', include: include}
-];
-var loaders = [
-  {test: /\.styl$/, loader: 'style!css!stylus?paths=node_modules/stylus/' },
-  {test: /\.sass$/, loader: 'style!css?sourceMap!sass?sourceMap&indentedSyntax=true'},
-  {test: /\.png$/, loader: 'null'},
-  {test: /\.jpg$/, loader: 'null'},
-
-  // Loader for JSON, may be used in some tests
-  {test: /\.json$/, loader: 'json'},
-
-  // Need some real loaders for HTML, because angular directives are coupled with templates
-  {test: /\.haml$/, loader: 'hamlc-loader'},
-  {test: /\.html$/, loader: 'ng-cache?prefix=[dir]/[dir]'}
-];
-
+var webpackConfig = require('./webpack.config.js');
+delete webpackConfig.entry;
+delete webpackConfig.output;
 
 module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
-    files: [
-      'spec.js'
-    ],
-    webpack: {
-      devtool: 'eval',
-      module: {
-        loaders: loaders,
-        preLoaders: preLoaders
-      },
-      cache: true
-    },
+    files: ['karma-spec.js'],
+    preprocessors: {'karma-spec.js': ['webpack']},
+    webpack: webpackConfig,
     webpackMiddleware: {
+      noInfo: true,
       stats: {
         chunkModules: false,
         colors: true
@@ -56,10 +20,7 @@ module.exports = function (config) {
     webpackServer: {
       noInfo: true //please don't spam the console when running in karma!
     },
-    preprocessors: {
-      'spec.js': ['webpack']
-    },
-    reporters: ['spec', 'coverage'],
+    reporters: ['spec', 'coverage', 'html'],
     specReporter: {
       maxLogLines: 5,         // limit number of lines logged per test
       suppressErrorSummary: true,  // do not print error summary
@@ -78,6 +39,15 @@ module.exports = function (config) {
         {type: 'html'}
       ]
     },
+    htmlReporter: {
+      outputDir: 'coverage',
+      templatePath: null,
+      focusOnFailures: true,
+      namedFiles: true,
+      pageTitle: 'karma test report',
+      urlFriendlyName: false,
+      reportName: 'karma-report',
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_DEBUG,
@@ -95,6 +65,6 @@ module.exports = function (config) {
       }
     },
     singleRun: true,
-    captureTimeout: 5000,
+    captureTimeout: 10000,
   });
 };
