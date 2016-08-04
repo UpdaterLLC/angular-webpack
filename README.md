@@ -22,6 +22,9 @@ open http://localhost:8080
 To run tests
 
 ```sh
+npm run test-server
+
+# and open another terminal, then
 npm test
 ```
 
