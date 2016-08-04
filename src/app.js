@@ -17,7 +17,7 @@ app.config(['$logProvider',
 
 app.config(require('./app/app_router_config')(app));
 
-app.run(['$injector', $injector => app.register = $injector.loadModule.bind($injector)]);
+app.run(['$injector', $injector => app.loadModule = $injector.loadModule.bind($injector)]);
 
 function ExampleCtrl($scope) {
   $scope.exampleData = [

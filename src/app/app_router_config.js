@@ -12,30 +12,28 @@ const route = (entry, resolve) => ({
 
 
 export default app => {
-  const $inject = ['$routeProvider'];
 
   // We have to use hardcoded value for 'require' so it can be statically built
-  const RouterConfig = function ($routeProvider) {
+  // require.ensure https://webpack.github.io/docs/code-splitting.html
+  const RouterConfig = ($routeProvider) => {
     $routeProvider
 
-      .when('/', {template: ''})
-
-      .when('/home', route('home', callback =>
+      .when('/home', route('home', resolve =>
         require.ensure([], () =>
-          callback(app.register(require('./home').name)))))
+          resolve(app.loadModule(require('./home').name)))))
 
-      .when('/about', route('about', callback =>
+      .when('/about', route('about', resolve =>
         require.ensure([], () =>
-          callback(app.register(require('./about').name)))))
+          resolve(app.loadModule(require('./about').name)))))
 
-      .when('/haml', route('haml', callback =>
+      .when('/haml', route('haml', resolve =>
         require.ensure([], () =>
-          callback(app.register(require('./haml').name)))))
+          resolve(app.loadModule(require('./haml').name)))))
 
-      .otherwise({redirectTo: '/'});
+      .otherwise({redirectTo: '/home'});
   };
 
-  RouterConfig.$inject = $inject;
+  RouterConfig.$inject = ['$routeProvider'];
 
   return RouterConfig;
 };
