@@ -8,7 +8,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: ['karma-spec.js'],
-    preprocessors: {'karma-spec.js': ['webpack']},
+    preprocessors: {'karma-spec.js': ['webpack', 'sourcemap']},
     webpack: webpackConfig,
     webpackMiddleware: {
       noInfo: true,

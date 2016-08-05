@@ -143,9 +143,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 if (process.env.NODE_ENV === 'test') {
   config.bail = true;
-  config.debug = false;
+  config.debug = true;
+  config.devtool = '#inline-source-map';
   config.profile = false;
-  config.devtool = 'eval';
   config.cache = true;
   config.plugins = config.plugins.concat([
     new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify('test')}})
