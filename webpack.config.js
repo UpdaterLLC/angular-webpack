@@ -46,6 +46,7 @@ var config = {
       'msgpack-lite',
       'axios',
       'ngstorage',
+      './src/app_common.styl',
       './src/app.styl',
       './src/app.js'
     ]

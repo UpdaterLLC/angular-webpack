@@ -1,4 +1,19 @@
 body
   margin 0
   padding 0
+  background $backgroundColor
+
+.browserupgrade
+  background #ccc
+  color #000
+  margin 0.2em 0
+  padding 0.2em 0
+
+section[ng-app="app"],
+ng-view
+  disable-user-select()
+  fix-width()
+  background $appBackgroundColor
+  cursor: default
+
 

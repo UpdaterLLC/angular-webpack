@@ -25,7 +25,8 @@ require('angular-route');
 // require('msgpack-lite');
 // require('axios');
 require('ngstorage');
-// require('./src/app.styl');
+require('./src/app_common.styl');
+require('./src/app.styl');
 // require('./src/app.js');
 
 testsContext = require.context('./src', true, /_spec\.js$/);
