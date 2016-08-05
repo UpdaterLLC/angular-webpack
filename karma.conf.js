@@ -7,6 +7,7 @@ module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
+    failOnEmptyTestSuite: false,
     files: ['karma-spec.js'],
     preprocessors: {'karma-spec.js': ['webpack', 'sourcemap']},
     webpack: webpackConfig,
@@ -51,6 +52,15 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_DEBUG,
+    client: {
+      captureConsole: true,
+    },
+    browserConsoleLogOptions: {
+      level: "debug",
+      format: "%b %T: %m",
+      path:'./coverage/karma.log',
+      terminal: false
+    },
     autoWatch: false,
     browsers: ['PhantomJS_Desktop'],
     customLaunchers: {
@@ -66,5 +76,6 @@ module.exports = function (config) {
     },
     singleRun: true,
     captureTimeout: 10000,
+    reportSlowerThan: 300000,
   });
 };

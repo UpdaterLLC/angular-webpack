@@ -45,7 +45,7 @@ var config = {
       'node-uuid',
       'msgpack-lite',
       'axios',
-      'ng-storage',
+      'ngstorage',
       './src/app.styl',
       './src/app.js'
     ]

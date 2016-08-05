@@ -24,7 +24,7 @@ require('angular-route');
 // require('node-uuid');
 // require('msgpack-lite');
 // require('axios');
-// require('ng-storage');
+require('ngstorage');
 // require('./src/app.styl');
 // require('./src/app.js');
 
