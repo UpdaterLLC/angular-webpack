@@ -1,8 +1,10 @@
 var path = require('path');
 var argv = require('yargs').argv;
+var moment = require('moment');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var packageJSON = require('./package.json');
 
 var sources = [
   path.resolve('./src')
@@ -48,6 +50,7 @@ var config = {
       'ngstorage',
       './src/app_common.styl',
       './src/app.styl',
+      './src/app_constants.js',
       './src/app.js'
     ]
   },
@@ -93,7 +96,12 @@ var config = {
     new HtmlWebpackPlugin({
       template: path.resolve('src', 'index.html'),
       inject: 'body'
-    })
+    }),
+    new webpack.DefinePlugin({
+      __APP_VERS__: JSON.stringify(packageJSON.version),
+      __APP_DESC__: JSON.stringify(packageJSON.description),
+      __BUILD_DATE__: JSON.stringify(moment().format('YYYYMMDD')),
+    }),
   ],
   devtool: '#source-map',
   devServer: {

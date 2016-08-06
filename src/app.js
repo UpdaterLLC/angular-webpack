@@ -9,7 +9,8 @@ const app = angular.module('app', [
   'ngAnimate',
   'validation.match',
   'nvd3ChartDirectives',
-  'angularSpinner'
+  'angularSpinner',
+  'app.constants',
 ]);
 
 app.config(['$logProvider',
@@ -18,6 +19,8 @@ app.config(['$logProvider',
 app.config(require('./app/app_router_config')(app));
 
 app.run(['$injector', $injector => app.loadModule = $injector.loadModule.bind($injector)]);
+
+app.run(() => console.log(`${__APP_DESC__} ${__APP_VERS__} build:${__BUILD_DATE__}  Copyright(C) Sony Real Estate Corp. all right reserved.`));
 
 function ExampleCtrl($scope) {
   $scope.exampleData = [

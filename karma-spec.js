@@ -27,6 +27,7 @@ require('angular-route');
 require('ngstorage');
 require('./src/app_common.styl');
 require('./src/app.styl');
+require('./src/app_constants.js');
 // require('./src/app.js');
 
 testsContext = require.context('./src', true, /_spec\.js$/);
