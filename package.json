@@ -87,7 +87,7 @@
     "node-uuid": "^1.4.7",
     "null-loader": "^0.1.1",
     "nvd3": "1.1.15",
-    "phantomjs": "^1.9.17",
+    "phantomjs-prebuilt": "^2.1.7",
     "protractor": "^4.0.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
