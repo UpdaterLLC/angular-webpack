@@ -70,6 +70,13 @@ module.exports = function (config) {
           viewportSize: {
             width: 1280,
             height: 1000
+          },
+          onCallback: function(data){
+            if (data.type === "render") {
+              // this function will not have the scope of karma.conf.js so we must define any global variable inside it
+              if (window.renderId === undefined) { window.renderId = 0; }
+              page.render(data.fname || ("screenshot_" + (window.renderId++) + ".png"));
+            }
           }
         }
       }
