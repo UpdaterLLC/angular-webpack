@@ -1,27 +1,34 @@
-// Take screenshot from Karma while running tests in PhantomJS 2?
-// http://stackoverflow.com/questions/34694765/take-screenshot-from-karma-while-running-tests-in-phantomjs-2/34695107#34695107
 //
 // ```karma.conf.js:
 //  :
-// PhantomJSCustom: {
-//   base: 'PhantomJS',
-//   options: {
-//     onCallback: function(data) {
-//       if (data.type === 'render' && data.fname !== undefined) {
-//         page.render(data.fname);
-//       }
-//     }
+// onCallback: function(data){
+//   if (data.type === "render") {
+//     // this function will not have the scope of karma.conf.js so we must define any global variable inside it
+//     if (window.renderId === undefined) { window.renderId = 0; }
+//     page.render(data.fname || ("screenshot_" + (window.renderId++) + ".png"));
+//   } else if (data.type === "resize") {
+//     if (!data.viewportSize.width) data.viewportSize.width = page.viewportSize.width;
+//     if (!data.viewportSize.height) data.viewportSize.height = page.viewportSize.height;
+//     page.viewportSize.width = data.viewportSize.width;
+//     page.viewportSize.height = data.viewportSize.height;
 //   }
 // }
 //  :
 // ```
 //
+// ```in your code
 // require('karma-phantomjs-helper.js');
+// setViewportSize({height: 500});
 // takeScreenshot();
-//
+// ```
 
+// Take screenshot from Karma while running tests in PhantomJS 2?
+// http://stackoverflow.com/questions/34694765/take-screenshot-from-karma-while-running-tests-in-phantomjs-2/34695107#34695107
 // With this function you can take screenshots in PhantomJS!
 // by default, screenshots will be saved in .tmp/screenshots/ folder with a progressive name (n.png)
+//
+// takeScreenshot();
+//
 var renderId = 0;
 function takeScreenshot(file) {
   // check if we are in PhantomJS
@@ -37,3 +44,18 @@ function takeScreenshot(file) {
 }
 
 window.takeScreenshot = takeScreenshot;
+
+// change phantomjs's browser window size (aka. viewport).
+// viewportSize is object that has property width and height.
+// Either width or height can omit. Both can not.
+//
+// require('karma-phantomjs-helper.js');
+// setViewportSize({height: 500});
+//
+function setViewportSize(viewportSize) {
+  if (window.top.callPhantom === undefined) return;
+  if (!viewportSize) return;
+  window.top.callPhantom({type: 'resize', viewportSize: viewportSize});
+}
+
+window.setViewportSize = setViewportSize;

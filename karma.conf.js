@@ -76,6 +76,11 @@ module.exports = function (config) {
               // this function will not have the scope of karma.conf.js so we must define any global variable inside it
               if (window.renderId === undefined) { window.renderId = 0; }
               page.render(data.fname || ("screenshot_" + (window.renderId++) + ".png"));
+            } else if (data.type === "resize") {
+              if (!data.viewportSize.width) data.viewportSize.width = page.viewportSize.width;
+              if (!data.viewportSize.height) data.viewportSize.height = page.viewportSize.height;
+              page.viewportSize.width = data.viewportSize.width;
+              page.viewportSize.height = data.viewportSize.height;
             }
           }
         }
