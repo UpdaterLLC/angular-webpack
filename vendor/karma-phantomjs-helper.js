@@ -52,6 +52,8 @@ window.takeScreenshot = takeScreenshot;
 // require('karma-phantomjs-helper.js');
 // setViewportSize({height: 500});
 //
+// This function is good to use in every beforeEach().
+//
 function setViewportSize(viewportSize) {
   if (window.top.callPhantom === undefined) return;
   if (!viewportSize) return;
