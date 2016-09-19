@@ -79,8 +79,7 @@ module.exports = function (config) {
             } else if (data.type === "resize") {
               if (!data.viewportSize.width) data.viewportSize.width = page.viewportSize.width;
               if (!data.viewportSize.height) data.viewportSize.height = page.viewportSize.height;
-              page.viewportSize.width = data.viewportSize.width;
-              page.viewportSize.height = data.viewportSize.height;
+              page.viewportSize = { width: data.viewportSize.width, height: data.viewportSize.height};
             }
           }
         }
